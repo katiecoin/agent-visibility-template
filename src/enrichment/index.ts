@@ -16,11 +16,12 @@ const MAX_INPUT_BYTES = 60_000;
  */
 export function trimContent(input: string): string {
 	let s = input;
-	s = s.replace(/<script[\s\S]*?<\/script>/gi, "");
+	s = s.replace(/<script\b[^>]*>[\s\S]*?(?:<\/script\b[^>]*>|$)/gi, "");
 	s = s.replace(/<style[\s\S]*?<\/style>/gi, "");
 	s = s.replace(/<svg[\s\S]*?<\/svg>/gi, "");
 	s = s.replace(/<!--[\s\S]*?-->/g, "");
 	s = s.replace(/<[^>]+>/g, " "); // drop remaining tags but keep text
+	s = s.replace(/[<>]/g, " "); // remove stray angle brackets from malformed tags
 	s = s.replace(/\s+/g, " ").trim();
 	if (s.length > MAX_INPUT_BYTES) s = s.slice(0, MAX_INPUT_BYTES);
 	return s;
