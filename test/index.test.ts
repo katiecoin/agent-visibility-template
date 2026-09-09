@@ -1,5 +1,6 @@
 import { env, SELF } from "cloudflare:test";
 import { beforeAll, describe, it, expect } from "vitest";
+import { trimContent } from "../src/enrichment";
 import { ENRICHED_KEY } from "../src/lib/store";
 import type { Resource } from "../src/lib/types";
 
@@ -40,6 +41,11 @@ beforeAll(async () => {
 });
 
 describe("Agent Visibility template", () => {
+	it("removes script blocks even with whitespace in the closing tag", () => {
+		const text = trimContent('<p>ok</p><script>alert(1)</script >after');
+		expect(text).toBe("ok after");
+	});
+
 	it("serves /llms.txt as plain text with a Content-Signal header", async () => {
 		const res = await SELF.fetch(`${BASE}/llms.txt`);
 		expect(res.status).toBe(200);

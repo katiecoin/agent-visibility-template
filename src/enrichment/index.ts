@@ -10,15 +10,39 @@ import type { RawResource, Resource } from "../lib/types";
 
 const MAX_INPUT_BYTES = 60_000;
 
+function stripElementBlock(input: string, tag: string): string {
+	let out = input;
+	const open = `<${tag}`;
+	const close = `</${tag}`;
+	let lower = out.toLowerCase();
+	let start = lower.indexOf(open);
+
+	while (start !== -1) {
+		const openEnd = lower.indexOf(">", start + open.length);
+		if (openEnd === -1) return out.slice(0, start);
+
+		const closeStart = lower.indexOf(close, openEnd + 1);
+		if (closeStart === -1) return out.slice(0, start);
+
+		const closeEnd = lower.indexOf(">", closeStart + close.length);
+		const end = closeEnd === -1 ? out.length : closeEnd + 1;
+		out = out.slice(0, start) + out.slice(end);
+		lower = out.toLowerCase();
+		start = lower.indexOf(open, start);
+	}
+
+	return out;
+}
+
 /**
  * Trim source content to a model-feedable window. Strips script/style/svg and
  * HTML comments, collapses whitespace, and truncates as a last resort.
  */
 export function trimContent(input: string): string {
 	let s = input;
-	s = s.replace(/<script[\s\S]*?<\/script>/gi, "");
-	s = s.replace(/<style[\s\S]*?<\/style>/gi, "");
-	s = s.replace(/<svg[\s\S]*?<\/svg>/gi, "");
+	s = stripElementBlock(s, "script");
+	s = stripElementBlock(s, "style");
+	s = stripElementBlock(s, "svg");
 	s = s.replace(/<!--[\s\S]*?-->/g, "");
 	s = s.replace(/<[^>]+>/g, " "); // drop remaining tags but keep text
 	s = s.replace(/\s+/g, " ").trim();
