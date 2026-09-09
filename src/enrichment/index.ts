@@ -19,7 +19,7 @@ export function trimContent(input: string): string {
 	let previous: string;
 	do {
 		previous = s;
-		s = s.replace(/<script[\s\S]*?<\/script>/gi, "");
+		s = s.replace(/<script[\s\S]*?<\/script\b[^>]*>/gi, "");
 	} while (s !== previous);
 	s = s.replace(/<style[\s\S]*?<\/style>/gi, "");
 	s = s.replace(/<svg[\s\S]*?<\/svg>/gi, "");
