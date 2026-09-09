@@ -19,7 +19,11 @@ export function trimContent(input: string): string {
 	s = s.replace(/<script[\s\S]*?<\/script>/gi, "");
 	s = s.replace(/<style[\s\S]*?<\/style>/gi, "");
 	s = s.replace(/<svg[\s\S]*?<\/svg>/gi, "");
-	s = s.replace(/<!--[\s\S]*?-->/g, "");
+	let previous: string;
+	do {
+		previous = s;
+		s = s.replace(/<!--[\s\S]*?-->/g, "");
+	} while (s !== previous);
 	s = s.replace(/<[^>]+>/g, " "); // drop remaining tags but keep text
 	s = s.replace(/\s+/g, " ").trim();
 	if (s.length > MAX_INPUT_BYTES) s = s.slice(0, MAX_INPUT_BYTES);
