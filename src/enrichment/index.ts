@@ -16,7 +16,8 @@ const MAX_INPUT_BYTES = 60_000;
  */
 export function trimContent(input: string): string {
 	let s = input;
-	s = s.replace(/<script\b[^>]*>[\s\S]*?<\/script\b[^>]*>/gi, "");
+	s = s.replace(/<script\b[^>]*>[\s\S]*?(?:<\/script\b[^>]*>|$)/gi, "");
+	s = s.replace(/<\/?\s*script\b[^>]*>?/gi, "");
 	s = s.replace(/<style[\s\S]*?<\/style>/gi, "");
 	s = s.replace(/<svg[\s\S]*?<\/svg>/gi, "");
 	s = s.replace(/<!--[\s\S]*?-->/g, "");
