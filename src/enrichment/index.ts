@@ -11,15 +11,27 @@ import type { RawResource, Resource } from "../lib/types";
 const MAX_INPUT_BYTES = 60_000;
 
 /**
+ * HTML comments and script/style/svg blocks, matched in document order.
+ * Closing tags are matched loosely (`</script >`, `</script foo="bar">`,
+ * `--!>`), and an unterminated block or comment runs to the end of the input,
+ * the same way a browser would treat it.
+ */
+const STRIPPED_BLOCKS =
+	/<!--[\s\S]*?(?:--!?>|$)|<(script|style|svg)\b[\s\S]*?(?:<\/\1\b[^>]*>|$)/gi;
+
+/**
  * Trim source content to a model-feedable window. Strips script/style/svg and
  * HTML comments, collapses whitespace, and truncates as a last resort.
  */
 export function trimContent(input: string): string {
 	let s = input;
-	s = s.replace(/<script[\s\S]*?<\/script>/gi, "");
-	s = s.replace(/<style[\s\S]*?<\/style>/gi, "");
-	s = s.replace(/<svg[\s\S]*?<\/svg>/gi, "");
-	s = s.replace(/<!--[\s\S]*?-->/g, "");
+	// Repeat until stable: removing one block can splice together a new one
+	// (e.g. `<scr<script></script>ipt>`), so a single pass is not enough.
+	let previous: string;
+	do {
+		previous = s;
+		s = s.replace(STRIPPED_BLOCKS, "");
+	} while (s !== previous);
 	s = s.replace(/<[^>]+>/g, " "); // drop remaining tags but keep text
 	s = s.replace(/\s+/g, " ").trim();
 	if (s.length > MAX_INPUT_BYTES) s = s.slice(0, MAX_INPUT_BYTES);
