@@ -1,6 +1,12 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "agent-visibility-template",
+	"account_id": "12295b17b80bd0637d3de1cc5f281b0c",
+	"workers_dev": true,
+	"routes": [
+		{ "pattern": "katiebuilds.xyz", "custom_domain": true },
+		{ "pattern": "www.katiebuilds.xyz", "custom_domain": true }
+	],
 	"main": "./src/worker/index.ts",
 	"compatibility_date": "2025-10-08",
 	"upload_source_maps": true,
@@ -29,7 +35,7 @@
 	"kv_namespaces": [
 		{
 			"binding": "VISIBILITY_CACHE",
-			"id": "ea772e0edc934ba5b0bf0a2c929b6a46"
+			"id": "ab8c0444b68842989ee1fb1f00ddd2d8"
 		}
 	],
 	"vars": {
