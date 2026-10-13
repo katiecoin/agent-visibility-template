@@ -1,6 +1,8 @@
-# AI Agent Visibility
+# Katie Coins Base
 
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/cloudflare/templates/tree/main/agent-visibility-template)
+The agent-readable site for Katie Coins' crypto and web3 projects, served at [katiecoinsbase.xyz](https://katiecoinsbase.xyz). Built on Cloudflare's AI Agent Visibility template.
+
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/katiecoin/agent-visibility-template)
 
 <!-- dash-content-start -->
 
@@ -28,7 +30,7 @@ This template ships with sample content so it works the moment you deploy it. Po
 - **Developers exploring AEO (Answer Engine Optimization).** A working reference for the emerging set of agent-discovery conventions, all in one Worker.
 - **Teams who keep getting agent 4xxs.** If bot analytics show AI agents hitting paths they can't read, this is the fix: serve them content they can.
 
-> Looking for a commerce-specific version? See the [`commerce-llms-txt-template`](../commerce-llms-txt-template) for a product-catalog–focused `/llms.txt`. This template is the general, multi-surface counterpart.
+> Looking for a commerce-specific version? See Cloudflare's [`commerce-llms-txt-template`](https://github.com/cloudflare/templates/tree/main/commerce-llms-txt-template) for a product-catalog–focused `/llms.txt`. This template is the general, multi-surface counterpart.
 
 ## Getting Started
 
@@ -96,7 +98,7 @@ All configuration lives in `wrangler.jsonc` under `vars`:
 
 | Variable               | Description                                                   | Default                                    |
 | ---------------------- | ------------------------------------------------------------- | ------------------------------------------ |
-| `SITE_NAME`            | Your site's name, shown across every surface                  | `Acme Docs`                                |
+| `SITE_NAME`            | Your site's name, shown across every surface                  | `Katie Coins Base`                         |
 | `SITE_DESCRIPTION`     | One-line description for agents                               | _(sample)_                                 |
 | `AI_MODEL`             | Workers AI model used for enrichment                          | `@cf/meta/llama-3.3-70b-instruct-fp8-fast` |
 | `ENRICHMENT_CACHE_TTL` | Seconds to cache enriched records in KV                       | `3600`                                     |
@@ -119,7 +121,7 @@ Secrets (set with `npx wrangler secret put <NAME>`, never committed):
 curl -X POST https://your-worker.workers.dev/api/resources \
   -H "authorization: Bearer $ADMIN_TOKEN" \
   -H "content-type: application/json" \
-  -d '{"slug":"about","url":"https://example.com/about","title":"About","body":"<h1>About us</h1>..."}'
+  -d '{"slug":"about","url":"https://katiecoinsbase.xyz/about","title":"About","body":"<h1>About us</h1>..."}'
 ```
 
 Slugs must match `^[a-z0-9-]{1,63}$`, `url` must be `http(s)`, bodies are capped
@@ -195,4 +197,4 @@ run locally without making Workers AI requests.
 
 ## License
 
-See the repository [LICENSE](../LICENSE).
+Based on [cloudflare/templates](https://github.com/cloudflare/templates), released under the MIT License — see the upstream [LICENSE](https://github.com/cloudflare/templates/blob/main/LICENSE).

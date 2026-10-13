@@ -202,7 +202,7 @@ export default function App() {
 	return (
 		<main className="container">
 			<header>
-				<p className="kicker">AI Agent Visibility</p>
+				<p className="kicker">Crypto &amp; web3 projects</p>
 				<h1>{info.site.name}</h1>
 				<p className="lede">{info.site.description}</p>
 				<p className="muted">

@@ -8,8 +8,8 @@ declare namespace Cloudflare {
 	interface Env {
 		VISIBILITY_CACHE: KVNamespace;
 		AI: Ai;
-		SITE_NAME: "Acme Docs";
-		SITE_DESCRIPTION: "Product documentation for the Acme platform.";
+		SITE_NAME: "Katie Coins Base";
+		SITE_DESCRIPTION: "Home base for Katie Coins' crypto and web3 projects.";
 		AI_MODEL: "@cf/meta/llama-3.3-70b-instruct-fp8-fast";
 		ENRICHMENT_CACHE_TTL: "3600";
 		CONTENT_SIGNAL: "ai-input=yes, search=yes, ai-train=no";

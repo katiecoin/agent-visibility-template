@@ -46,7 +46,7 @@ test/index.test.ts       Worker tests (vitest-pool-workers, via SELF.fetch)
 
 ```bash
 npm run build   # tsc -b && vite build
-npm test        # vitest (hits live Workers AI — needs credentials)
+npm test        # vitest; run `npm run build` first. Tests seed KV and do not call live Workers AI
 ```
 
 After editing `wrangler.jsonc`, rerun `npx wrangler types`.
