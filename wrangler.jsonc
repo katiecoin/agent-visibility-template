@@ -5,7 +5,9 @@
 	"workers_dev": true,
 	"routes": [
 		{ "pattern": "katiebuilds.xyz", "custom_domain": true },
-		{ "pattern": "www.katiebuilds.xyz", "custom_domain": true }
+		{ "pattern": "www.katiebuilds.xyz", "custom_domain": true },
+		{ "pattern": "katiecoinsbase.xyz", "custom_domain": true },
+		{ "pattern": "www.katiecoinsbase.xyz", "custom_domain": true }
 	],
 	"main": "./src/worker/index.ts",
 	"compatibility_date": "2025-10-08",
