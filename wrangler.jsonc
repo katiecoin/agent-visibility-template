@@ -2,10 +2,6 @@
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "agent-visibility-template",
 	"main": "./src/worker/index.ts",
-	"routes": [
-		{ "pattern": "katiebuilds.xyz", "custom_domain": true },
-		{ "pattern": "www.katiebuilds.xyz", "custom_domain": true }
-	],
 	"compatibility_date": "2025-10-08",
 	"upload_source_maps": true,
 	"observability": {
