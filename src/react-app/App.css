@@ -189,3 +189,18 @@ footer {
 	padding-top: 1.5rem;
 	border-top: 1px solid rgba(128, 128, 128, 0.25);
 }
+
+.discord-link {
+	display: inline-block;
+	margin-top: 0.5rem;
+	padding: 0.5rem 1rem;
+	border-radius: 999px;
+	background: #5865f2;
+	color: #fff;
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.discord-link:hover {
+	background: #4752c4;
+}
