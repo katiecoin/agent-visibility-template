@@ -212,7 +212,7 @@ export default function App() {
 				<p>
 					<a
 						className="discord-link"
-						href="https://discord.gg/DfzNStU4f"
+						href="https://discord.gg/fBC6bbwd5U"
 						target="_blank"
 						rel="noreferrer"
 					>
